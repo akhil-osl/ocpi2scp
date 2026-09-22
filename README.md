@@ -198,7 +198,16 @@ Also open: whether `initial` should map to `configure` or `execparam`, how
 ## Development
 
 ```bash
-python -m pytest tests -q        # 41 tests
+python -m pytest tests -q        # 49 tests
+```
+
+Golden-file tests hold the generated output against committed references, so an
+unintended change shows up as a diff rather than passing silently. When a change
+is intended:
+
+```bash
+python tests/golden/regenerate.py
+git diff tests/golden/expected/      # review before committing
 ```
 
 ```
@@ -211,4 +220,6 @@ src/ocpi2sca/
   cli.py
 schemas/dtd/    SCA 2.2.2 DTDs, vendored
 corpus/opencpi/ real components as test input
+tests/unit/     reader, mapping, emitter, validation
+tests/golden/   generated output vs committed references
 ```

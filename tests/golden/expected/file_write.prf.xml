@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE properties PUBLIC "-//JTRS//DTD SCA V2.2.2 PRF//EN" "properties.dtd">
+<properties>
+  <simple id="DCE:af4894ae-859e-548a-81ee-98b6c25fd106" name="fileName" type="string" mode="readwrite">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:5e507c11-36e9-5b66-a958-b03148f10a38" name="messagesInFile" type="boolean" mode="readwrite">
+    <value>false</value>
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:25186b27-e3da-57f1-868b-39514bd9ceae" name="bytesWritten" type="ulonglong" mode="readonly">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:4a91ff9e-0486-54a9-b92d-eeb329a3277e" name="messagesWritten" type="ulonglong" mode="readonly">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:4c6f45a5-0e70-5469-83e1-f5f60010cc68" name="stopOnEOF" type="boolean" mode="readwrite">
+    <value>true</value>
+    <kind kindtype="configure"/>
+  </simple>
+</properties>

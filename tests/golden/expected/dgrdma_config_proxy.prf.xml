@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE properties PUBLIC "-//JTRS//DTD SCA V2.2.2 PRF//EN" "properties.dtd">
+<properties>
+  <simple id="DCE:eb5866d5-f302-5fa3-9628-8812f6e54085" name="remote_mac_addr" type="ulonglong" mode="readwrite">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:97342a74-2a0a-52ad-b70a-9b27b68f4a46" name="remote_dst_id" type="ushort" mode="readwrite">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:357d62b3-759f-5777-a7f3-a779e40ba50f" name="local_src_id" type="ushort" mode="readwrite">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:ed9c13e7-55c7-5aa3-9244-dfdfa3453369" name="interface_mtu" type="ushort" mode="readwrite">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:416378e9-bbbe-5380-8722-a5f5c7cbb16d" name="ack_wait" type="ulong" mode="readwrite">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:268d3c31-a837-5c13-aeaf-13f7380fb6a7" name="max_acks_outstanding" type="octet" mode="readwrite">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:dd01755f-045d-5933-bc3f-f8cfe56e57d5" name="coalesce_wait" type="ulong" mode="readwrite">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:dcbaf279-edab-5b09-927d-2b7c120bccea" name="dual_ethernet" type="octet" mode="readwrite">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:8c83dddd-90bb-5961-bddb-44903160005c" name="ack_tracker_rej_ack" type="octet" mode="readonly">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:6d02fd2e-d827-5d68-9bc0-91f9839b4e46" name="ack_tracker_bitfield" type="ulong" mode="readonly">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:bf5c5903-16f0-5ae5-ab9d-c8d972b1f8e5" name="ack_tracker_base_seqno" type="ushort" mode="readonly">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:31c8a167-6e04-5fee-a34f-bc383eec5f72" name="ack_tracker_rej_seqno" type="ushort" mode="readonly">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:eb870cd0-6e8e-5a5d-9df3-e061e32af5b6" name="ack_tracker_total_acks_sent" type="ushort" mode="readonly">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:5b4eb174-d156-52b3-9020-b89f95cc6868" name="ack_tracker_tx_acks_sent" type="ushort" mode="readonly">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:8fd513e0-dee7-5647-a42e-40e23a0d1f23" name="ack_tracker_pkts_enqueued" type="ushort" mode="readonly">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:cc152ba5-b422-5278-8b19-5e8b5f2fc7e4" name="ack_tracker_reject_out_of_range" type="ushort" mode="readonly">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:46de416f-a0c4-58e2-a187-ffebaab371b0" name="ack_tracker_reject_already_set" type="ushort" mode="readonly">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:c2179078-1b12-5eac-8b00-dba4550cecb5" name="ack_tracker_accepted_by_peek" type="ushort" mode="readonly">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:0d3dc98a-bdc0-5abb-b3c3-3fb5c5c1339b" name="ack_tracker_high_watermark" type="ushort" mode="readonly">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:f0b61f03-e1a1-51e5-932d-1d2c716bf469" name="frame_parser_reject" type="ushort" mode="readonly">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:a0018674-c8e9-5c7b-82a7-95898349edc4" name="remote_ip_addr" type="ulong" mode="readwrite">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:52cf6e77-b143-5db5-9cdf-8d58a0be42d3" name="remote_udp_port" type="ushort" mode="readwrite">
+    <kind kindtype="configure"/>
+  </simple>
+</properties>

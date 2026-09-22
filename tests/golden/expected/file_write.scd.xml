@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE softwarecomponent PUBLIC "-//JTRS//DTD SCA V2.2.2 SCD//EN" "softwarecomponent.dtd">
+<softwarecomponent>
+  <corbaversion>2.2</corbaversion>
+  <componentrepid repid="IDL:CF/Resource:1.0"/>
+  <componenttype>resource</componenttype>
+  <componentfeatures>
+    <supportsinterface repid="IDL:CF/Resource:1.0" supportsname="Resource"/>
+    <ports>
+      <provides providesname="in" repid="IDL:ocpi/protocol/in:1.0"/>
+    </ports>
+  </componentfeatures>
+  <interfaces>
+    <interface repid="IDL:CF/Resource:1.0" name="Resource">
+      <inheritsinterface repid="IDL:CF/PortSupplier:1.0"/>
+    </interface>
+    <interface repid="IDL:ocpi/protocol/in:1.0" name="in">
+      <inheritsinterface repid="IDL:CF/PortSupplier:1.0"/>
+    </interface>
+  </interfaces>
+</softwarecomponent>

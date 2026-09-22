@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE properties PUBLIC "-//JTRS//DTD SCA V2.2.2 PRF//EN" "properties.dtd">
+<properties>
+  <simple id="DCE:f3f3c061-7ab9-5110-85fb-19ad6c19f035" name="fileName" type="string" mode="readwrite">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:2a7ed654-7f00-5a87-b8f8-11e77ec9cd58" name="messagesInFile" type="boolean" mode="readwrite">
+    <value>false</value>
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:048fcd90-1bc6-50fb-895e-2626985329d5" name="opcode" type="octet" mode="readwrite">
+    <value>0</value>
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:3188938d-1b6b-5e81-b872-f012b035935a" name="messageSize" type="ulong" mode="readwrite">
+    <value>0</value>
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:80fc7084-afb5-592c-b2ed-995e6a057b41" name="granularity" type="ulong" mode="readwrite">
+    <value>1</value>
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:9e7bf216-83cd-5f88-8d3c-04a6e009a192" name="repeat" type="boolean" mode="readwrite">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:aa38eb6f-38ab-5c95-b44a-ab8623f2fbbc" name="bytesRead" type="ulonglong" mode="readonly">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:b9217240-a990-58d7-9a90-e9b398ab0aab" name="messagesWritten" type="ulonglong" mode="readonly">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:bbc5a7a8-4032-565f-a4a5-d1043568cf61" name="suppressEOF" type="boolean" mode="readwrite">
+    <kind kindtype="configure"/>
+  </simple>
+  <simple id="DCE:3920345a-4fe9-570a-80c7-7d08819af8e0" name="badMessage" type="boolean" mode="readonly">
+    <kind kindtype="configure"/>
+  </simple>
+</properties>
