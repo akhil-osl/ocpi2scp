@@ -1,0 +1,11 @@
+<!-- 
+The file writer writes a file from data it recieves on its input
+Properties:
+ messagesInFile: indicates that messages, including length and opcode, should be written in the file
+-->
+<RccWorker controloperations="start,release" spec="file_write_spec.xml" version='2'>
+  <property name='suppressWrites' type='bool' initial='true'/>
+  <property name='countData' type='bool' initial='true'/>
+  <property name='bytesPerSecond' type='ulonglong' volatile='true'/>
+  <port name='in' buffersize='8k' workereof='true'/>
+</RccWorker>

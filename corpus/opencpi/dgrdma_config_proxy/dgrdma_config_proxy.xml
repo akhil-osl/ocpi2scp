@@ -1,0 +1,30 @@
+<RccWorker language='c++' spec='dgrdma_config_proxy-spec' version='2' controlOperations='start,stop,release'>
+
+    <specproperty Name='remote_mac_addr'                    ReadSync='true'  WriteSync='true' />
+    <specproperty Name='remote_dst_id'                      ReadSync='true'  WriteSync='true' />
+    <specproperty Name='local_src_id'                       ReadSync='true'  WriteSync='true' />
+    <specproperty Name='interface_mtu'                      ReadSync='true'  WriteSync='true' />
+    <specproperty Name='ack_wait'                           ReadSync='true'  WriteSync='true' />
+    <specproperty Name='max_acks_outstanding'               ReadSync='true'  WriteSync='true' />
+    <specproperty Name='coalesce_wait'                      ReadSync='true'  WriteSync='true' />
+    <specproperty Name='dual_ethernet'                      ReadSync='true'  WriteSync='true' />
+    <specproperty Name='ack_tracker_rej_ack'                ReadSync='true'  WriteSync='true' />
+    <specproperty Name='ack_tracker_bitfield'               ReadSync='true'  WriteSync='true' />
+    <specproperty Name='ack_tracker_base_seqno'             ReadSync='true'  WriteSync='true' />
+    <specproperty Name='ack_tracker_rej_seqno'              ReadSync='true'  WriteSync='true' />
+    <specproperty Name='ack_tracker_total_acks_sent'        ReadSync='true'  WriteSync='true' />
+    <specproperty Name='ack_tracker_tx_acks_sent'           ReadSync='true'  WriteSync='true' />
+    <specproperty Name='ack_tracker_pkts_enqueued'          ReadSync='true'  WriteSync='true' />
+    <specproperty Name='ack_tracker_reject_out_of_range'    ReadSync='true'  WriteSync='true' />
+    <specproperty Name='ack_tracker_reject_already_set'     ReadSync='true'  WriteSync='true' />
+    <specproperty Name='ack_tracker_accepted_by_peek'       ReadSync='true'  WriteSync='true' />
+    <specproperty Name='ack_tracker_high_watermark'         ReadSync='true'  WriteSync='true' />
+    <specproperty Name='frame_parser_reject'                ReadSync='true'  WriteSync='true' />
+    <specproperty Name='remote_ip_addr'                     ReadSync='true'  WriteSync='true' />
+    <specproperty Name='remote_udp_port'                    ReadSync='true'  WriteSync='true' />
+
+    <slaves>
+        <Instance worker='dgrdma_config_dev.hdl' name='dgrdma_config_dev1' />
+    </slaves>
+
+</RccWorker>

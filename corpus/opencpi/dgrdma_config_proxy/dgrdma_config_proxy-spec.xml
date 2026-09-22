@@ -1,0 +1,24 @@
+<ComponentSpec>
+    <Property Name='remote_mac_addr'                    initial='true'  type='ulonglong' volatile='true' />
+    <Property Name='remote_dst_id'                      initial='true'  type='ushort' volatile='true' />
+    <Property Name='local_src_id'                       initial='true'  type='ushort' volatile='true' />
+    <Property Name='interface_mtu'                      initial='true'  type='ushort' volatile='true' />
+    <Property Name='ack_wait'                           initial='true'  type='ulong'  volatile='true' />
+    <Property Name='max_acks_outstanding'               initial='true'  type='uchar'  volatile='true' />
+    <Property Name='coalesce_wait'                      initial='true'  type='ulong'  volatile='true' />
+    <Property Name='dual_ethernet'                      initial='true'  type='uchar'  volatile='true' />
+    <Property Name='ack_tracker_rej_ack'                                type='uchar'  volatile='true' />
+    <Property Name='ack_tracker_bitfield'                               type='ulong'  volatile='true' />
+    <Property Name='ack_tracker_base_seqno'                             type='ushort' volatile='true' />
+    <Property Name='ack_tracker_rej_seqno'                              type='ushort' volatile='true' />
+    <Property Name='ack_tracker_total_acks_sent'                        type='ushort' volatile='true' />
+    <Property Name='ack_tracker_tx_acks_sent'                           type='ushort' volatile='true' />
+    <Property Name='ack_tracker_pkts_enqueued'                          type='ushort' volatile='true' />
+    <Property Name='ack_tracker_reject_out_of_range'                    type='ushort' volatile='true' />
+    <Property Name='ack_tracker_reject_already_set'                     type='ushort' volatile='true' />
+    <Property Name='ack_tracker_accepted_by_peek'                       type='ushort' volatile='true' />
+    <Property Name='ack_tracker_high_watermark'                         type='ushort' volatile='true' />
+    <Property Name='frame_parser_reject'                                type='ushort' volatile='true' />    
+    <Property Name='remote_ip_addr'                     initial='true'  type='ulong'  volatile='true' />
+    <Property Name='remote_udp_port'                    initial='true'  type='ushort' volatile='true' />
+</ComponentSpec>

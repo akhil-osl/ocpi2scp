@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ocpi2sca"
+version = "0.1.0"
+description = "Generate SCA 2.2.2 descriptors from OpenCPI component metadata"
+requires-python = ">=3.9"
+dependencies = ["lxml>=4.6"]
+
+[project.scripts]
+ocpi2sca = "ocpi2sca.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
