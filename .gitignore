@@ -7,3 +7,4 @@ dist/
 out/
 .venv/
 *.egg-info/
+out/

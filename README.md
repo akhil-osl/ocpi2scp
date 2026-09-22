@@ -11,23 +11,21 @@ OpenCPI components. Several mapping decisions are provisional — see
 
 ## Quick start
 
-No install needed — `lxml` is the only dependency:
-
 ```bash
-PYTHONPATH=src python3 -m ocpi2sca.cli generate path/to/mycomp_spec.xml -o out/
+./setup-venv.sh
+source .venv/bin/activate
 ```
 
-Or install it, which adds an `ocpi2sca` command:
+Then:
 
 ```bash
-pip install -e .        # needs setuptools >= 64 for editable installs
 ocpi2sca generate path/to/mycomp_spec.xml -o out/
 ```
 
 Against a component from the bundled corpus:
 
 ```bash
-$ PYTHONPATH=src python3 -m ocpi2sca.cli generate corpus/opencpi/bias/bias_spec.xml -o out/
+$ ocpi2sca generate corpus/opencpi/bias/bias_spec.xml -o out/
 warning: property biasValue: type not declared, assumed 'ulong' (OpenCPI default ...)
 warning: dropped -- port in: protocol include 'stream32_protocol.xml' not resolved ...
 wrote out/bias.prf.xml
@@ -197,8 +195,10 @@ Also open: whether `initial` should map to `configure` or `execparam`, how
 
 ## Development
 
+With the venv active:
+
 ```bash
-python -m pytest tests -q        # 49 tests
+pytest -q                        # 49 tests
 ```
 
 Golden-file tests hold the generated output against committed references, so an
