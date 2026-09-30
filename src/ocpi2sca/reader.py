@@ -29,6 +29,7 @@ from typing import Optional
 
 from lxml import etree
 
+from . import mapping
 from .model import Component, Implementation, Inference, Port, Property
 
 # OpenCPI's default for a property with no Type attribute.
@@ -223,3 +224,161 @@ def _read_worker(path: Path, comp: Component) -> None:
         )
 
     comp.implementations.append(impl)
+
+
+# ---------------------------------------------------------------------------
+# Reverse: SCA SPD/SCD/PRF -> Component
+# ---------------------------------------------------------------------------
+#
+# See docs/OPEN-QUESTIONS-REVERSE.md. This reader knows no OpenCPI-specific
+# XML syntax to write -- it only builds the same resolved Component model the
+# forward reader builds, using mapping.py's inverse functions for every
+# judgement call. Genuinely lossy or ambiguous choices are recorded as
+# Inferences on the model, not asserted silently.
+#
+# First slice (RQ5): OCS (properties + ports) only. No OWD is emitted, since
+# nothing in SCA reliably determines OpenCPI worker model -- see emit.py.
+
+def read_component_from_sca(
+    spd_path: Path,
+    scd_path: Optional[Path] = None,
+    prf_path: Optional[Path] = None,
+) -> Component:
+    """Read an SCA descriptor set into a resolved Component model.
+
+    `spd_path` is required; it names the component and points at the SCD and
+    PRF unless overridden. Either companion file may be absent -- an SPD
+    alone still yields a Component, just with no properties or ports.
+    """
+    spd_path = Path(spd_path)
+    spd_root = etree.parse(str(spd_path)).getroot()
+    if not _tag_is(spd_root, "softpkg"):
+        raise ValueError(f"{spd_path}: expected <softpkg>, got <{spd_root.tag}>")
+
+    name = _attr(spd_root, "name") or spd_path.stem
+    comp = Component(name=name, spec_name=name)
+
+    base = spd_path.parent
+    if prf_path is None:
+        prf_path = _localfile_ref(spd_root, "propertyfile", base)
+    if scd_path is None:
+        scd_path = _localfile_ref(spd_root, "descriptor", base)
+
+    if prf_path is not None and Path(prf_path).exists():
+        _read_prf(Path(prf_path), comp)
+    if scd_path is not None and Path(scd_path).exists():
+        _read_scd(Path(scd_path), comp)
+
+    return comp
+
+
+def _localfile_ref(spd_root: etree._Element, tag: str, base: Path) -> Optional[Path]:
+    for el in spd_root:
+        if _tag_is(el, tag):
+            for child in el:
+                if _tag_is(child, "localfile"):
+                    lf = _attr(child, "name")
+                    if lf:
+                        return base / lf
+    return None
+
+
+def _read_prf(path: Path, comp: Component) -> None:
+    root = etree.parse(str(path)).getroot()
+    if not _tag_is(root, "properties"):
+        raise ValueError(f"{path}: expected <properties>, got <{root.tag}>")
+
+    for el in root:
+        if _tag_is(el, "simple"):
+            comp.properties.append(_read_simple(el, comp))
+
+
+def _read_simple(el: etree._Element, comp: Component) -> Property:
+    name = _attr(el, "name") or ""
+    sca_type = (_attr(el, "type") or "").strip().lower()
+    mode = (_attr(el, "mode") or "readonly").strip().lower()
+
+    enumerations = None
+    default = None
+    kindtype = None
+    enum_values: list[str] = []
+    for child in el:
+        if _tag_is(child, "enumerations"):
+            enumerations = child
+            for enum_el in child:
+                if _tag_is(enum_el, "enumeration"):
+                    label = _attr(enum_el, "label")
+                    if label:
+                        enum_values.append(label)
+        elif _tag_is(child, "value"):
+            default = child.text
+        elif _tag_is(child, "kind"):
+            kindtype = _attr(child, "kindtype")
+
+    ocpi_type = mapping.unmap_type(sca_type, has_enumerations=enumerations is not None)
+
+    flags = {"parameter": False, "volatile": False, "initial": False, "writable": False}
+    if kindtype is not None:
+        flags, inferences = mapping.unmap_kind_and_mode(
+            kindtype, mode, subject=f"property {name}"
+        )
+        comp.inferences.extend(inferences)
+    else:
+        comp.dropped.append(
+            f"property {name}: <simple> has no <kind> element "
+            f"(kindtype/mode not derivable, no access attributes set)"
+        )
+
+    return Property(
+        name=name,
+        type=ocpi_type,
+        default=default,
+        initial=flags["initial"],
+        parameter=flags["parameter"],
+        volatile=flags["volatile"],
+        writable=flags["writable"],
+        readable=True,
+        enums=enum_values,
+        # RQ6: no SCA-side signal distinguishes OpenCPI's own bookkeeping
+        # properties from an ordinary one that happens to be named ocpi_*.
+        # Nothing is assumed hidden on the way back.
+        hidden=False,
+    )
+
+
+def _read_scd(path: Path, comp: Component) -> None:
+    root = etree.parse(str(path)).getroot()
+    if not _tag_is(root, "softwarecomponent"):
+        raise ValueError(f"{path}: expected <softwarecomponent>, got <{root.tag}>")
+
+    for features in root:
+        if not _tag_is(features, "componentfeatures"):
+            continue
+        for child in features:
+            if not _tag_is(child, "ports"):
+                continue
+            for port_el in child:
+                comp.ports.append(_read_port_el(port_el, comp))
+
+
+def _read_port_el(el: etree._Element, comp: Component) -> Port:
+    is_uses = _tag_is(el, "uses")
+    name = _attr(el, "usesname") if is_uses else _attr(el, "providesname")
+    repid = _attr(el, "repid") or ""
+
+    protocol = mapping.unmap_port_repid(repid)
+    if protocol is None and repid:
+        comp.dropped.append(
+            f"port {name}: repid {repid!r} names a CORBA interface outside "
+            f"this tool's own namespace, no OpenCPI protocol recoverable"
+        )
+
+    return Port(
+        name=name or "",
+        # OpenCPI's own naming: "producer" is an output port. SCA "uses"
+        # consumes another component's port, i.e. it is this component's
+        # output -- the same direction the forward mapping already treats
+        # as producer (see emit.build_scd).
+        producer=is_uses,
+        protocol=protocol,
+    )
